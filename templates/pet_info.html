@@ -1,0 +1,20 @@
+{% extends 'base.html' %} {% block content %}
+
+<h1>Pet Details</h1>
+
+<ul>
+  <li>
+    <p>Name: {{ pet.name }}</p>
+    <img src="{{ pet.photo_url }}" />
+    <p>Age: {{pet.age}}</p>
+    <p>Species: {{pet.age}}</p>
+  </li>
+</ul>
+
+<form method="POST">
+  {% for field in form %}
+  <p>{{ field.label }} {{ field }}</p>
+  {% endfor %}
+  <button>Submit</button>
+</form>
+{% endblock %}
