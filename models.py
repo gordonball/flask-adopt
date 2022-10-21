@@ -42,7 +42,7 @@ class Pet(db.Model):
         default=""
     )
 
-    age = db.Coumn(
+    age = db.Column(
         db.Text,
         nullable=False
     )
