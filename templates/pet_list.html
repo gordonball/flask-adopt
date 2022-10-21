@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+flash messages
+
+<ul>
+{% for pet in pets %}
+  <li>
+    <p>{{ pet.name }}</p>
+    <img src="{{ pet.photo_url }}" alt="">
+    {% if {{ pet.availble }} %}<b>AVAILABLE</b>{% endif %}
+  </li>
+
+{% endblock %}
+</ul>
