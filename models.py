@@ -17,7 +17,7 @@ def connect_db(app):
 
 
 class Pet(db.Model):
-    """ """
+    """ Pet model for each individual pet """
 
     __tablename__ = "pets"
 
@@ -50,7 +50,8 @@ class Pet(db.Model):
 
     notes = db.Column(
         db.Text,
-        nullable=True
+        nullable=False,
+        default=""
     )
 
     available = db.Column(
@@ -60,4 +61,3 @@ class Pet(db.Model):
     )
 
 
-# change

@@ -2,7 +2,7 @@
 
 from flask_wtf import FlaskForm
 from wtforms import StringField, SelectField, BooleanField
-from wtforms.validators import InputRequired, Optional, url, DataRequired
+from wtforms.validators import InputRequired, Optional, URL
 
 
 class AddPetForm(FlaskForm):
@@ -14,7 +14,7 @@ class AddPetForm(FlaskForm):
                                    ('dog', "Dog"),
                                    ('porcupine', "Porcupine")],
                           validators=[InputRequired()])
-    photo_url = StringField("Photo(URL):", validators=[url(), Optional()])
+    photo_url = StringField("Photo(URL):", validators=[ Optional(), URL()])
     age = SelectField("Age:",
                       choices=[('baby', "Baby"),
                                ('young', "Young"),
@@ -26,6 +26,6 @@ class AddPetForm(FlaskForm):
 class EditPetForm(FlaskForm):
     """ Form for adding pets """
 
-    photo_url = StringField("Photo(URL):", validators=[url(), Optional()])
+    photo_url = StringField("Photo(URL):", validators=[URL(), Optional()])
     notes = StringField("Additional Notes: ", validators=[Optional()])
-    available = BooleanField("Available: ", validators=[DataRequired()])
+    available = BooleanField("Available: ")

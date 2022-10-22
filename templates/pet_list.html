@@ -3,10 +3,16 @@
 <ul>
   {% for pet in pets %}
   <li>
-    <p>{{ pet.name }}</p>
+    <a href="/{{ pet.id }}">{{ pet.name }}</a>
+
     <img src="{{ pet.photo_url }}" />
+
     {% if pet.available %}<b>AVAILABLE</b>{% endif %}
   </li>
   {% endfor %}
 </ul>
+<a href="/add">ADD PET</a>
+  {% for msg in get_flashed_messages() %}
+    {{ msg }}
+  {% endfor %}
 {% endblock %}

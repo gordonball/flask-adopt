@@ -27,7 +27,7 @@ toolbar = DebugToolbarExtension(app)
 
 @app.get('/')
 def show_homepage():
-    """ """
+    """ Displays list of pets on main page """
 
     pets = Pet.query.all()
     return render_template('pet_list.html', pets=pets)
@@ -35,7 +35,8 @@ def show_homepage():
 
 @app.route('/add', methods=["GET", "POST"])
 def add_pet():
-    """ Form for adding new pet"""
+    """ Displays form for adding new pet, if submitted/validated redirect to home page. """
+
     form = AddPetForm()
     if form.validate_on_submit():
 
@@ -65,15 +66,19 @@ def add_pet():
 
 @app.route('/<int:pet_id>', methods=["GET", "POST"])
 def edit_pet(pet_id):
+    """ Displays edit pet form, if submitted/validated redirect to pet info page
+        else display 404 error. """
 
     pet = Pet.query.get_or_404(pet_id)
 
-    form = EditPetForm()
+    # prepopulates form
+    form = EditPetForm(obj=pet)
 
     if form.validate_on_submit():
         photo_url = form.photo_url.data
         notes = form.notes.data
         available = form.available.data
+
 
         pet.photo_url = photo_url
         pet.notes = notes
@@ -81,6 +86,8 @@ def edit_pet(pet_id):
 
         db.session.commit()
 
-        return redirect(f"/{pet_id}")
+        flash(f"Edited {pet.name}!")
+        return redirect(f"/")
     else:
         return render_template("pet_info.html", pet=pet, form=form)
+
